@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Criar Setor</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+            
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                    MEMORANDO
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="175" header="Left" collapsible="true">
+                    <h:form>
+                    <p:menu>
+                        <p:submenu label="Resources">
+                            <p:menuitem value="Cadastrar Setor" url="/memorando/CadastrarSetor" />
+                            <p:menuitem value="Enviar Memorando" url="/memorando/EnviarMemorando" />
+                            <p:menuitem value="Listar Memorandos " url="/memorando/ListarMemorandos" />
+
+                        </p:submenu>
+
+                    </p:menu>
+                    </h:form>
+                </p:layoutUnit>
+
+            <p:layoutUnit position="center">
+                
+                <p:growl id="gro"/>
+                
+                <h:form id="formMemorando">
+                    
+                 <p:panelGrid columns="3">
+                    <h:outputText value="Número:"/>
+                    <p:inputText id="txtNome" value="#{memorando.numero}" required="true"
+                                 requiredMessage="Obrigatório"/>
+                    <p:message for="txtNome"/>
+
+                    <h:outputText value="Assunto"/>
+                    <p:inputText id="txtAssunto" value="#{memorando.assunto}" required="true" requiredMessage="Obrigatório"/>
+                    <p:message for="txtAssunto"/>
+
+                    <h:outputText value="Mensagem"/>
+                    <p:inputTextarea id="txtMensagem" value="#{memorando.mensagem}" required="true" requiredMessage="Obrigatório"/>
+                    <p:message for="txtMensagem"/>
+                    
+                    
+                    <h:outputText value="Tipo"/>
+                    <p:selectOneMenu id="txtTipo" value="#{memorando.tipo}" required="true" requiredMessage="Obrigatório">
+                        <f:selectItem itemLabel="Selecione" itemValue="" />
+                        <f:selectItem itemLabel="Circular" itemValue="0" />
+                        <f:selectItem itemLabel="Requisição" itemValue="1" />
+                    </p:selectOneMenu>
+                    <p:message for="txtTipo"/>
+                    
+                    <h:outputText value="Status"/>
+                    <p:selectOneMenu id="txtStatus" value="#{memorando.status}" required="true" requiredMessage="Obrigatório">
+                        <f:selectItem itemLabel="Selecione" itemValue="" />
+                        <f:selectItem itemLabel="Enviado" itemValue="1" />
+                        <f:selectItem itemLabel="Recebido e não enviado" itemValue="2" />
+                        <f:selectItem itemLabel="Lido" itemValue="3" />
+                        <f:selectItem itemLabel="Dado ciência" itemValue="4" />
+                        <f:selectItem itemLabel="Respondido" itemValue="5" />
+                    </p:selectOneMenu>
+                    <p:message for="txtStatus"/>
+                    
+                    <h:outputText value="Setor Origem"/>
+                    <p:selectOneMenu id="txtSetorOrigem" value="#{memorando.setorOrigem}" required="true" requiredMessage="Obrigatório">
+                        <f:selectItem itemLabel="Selecione" itemValue="" />
+                        <f:selectItem itemLabel="Enviado" itemValue="1" />
+                        <f:selectItem itemLabel="Recebido e não enviado" itemValue="2" />
+                        <f:selectItem itemLabel="Lido" itemValue="3" />
+                        <f:selectItem itemLabel="Dado ciência" itemValue="4" />
+                        <f:selectItem itemLabel="Respondido" itemValue="5" />
+                    </p:selectOneMenu>
+                    <p:message for="txtSetorOrigem"/>
+                    <h:outputText value="Setor Destino"/>
+                    <p:selectOneMenu id="txtSetorDestino" value="#{memorando.setorDestino}" required="true" requiredMessage="Obrigatório">
+                        <f:selectItem itemLabel="Selecione" itemValue="" />
+                        <f:selectItem itemLabel="Enviado" itemValue="1" />
+                        <f:selectItem itemLabel="Recebido e não enviado" itemValue="2" />
+                        <f:selectItem itemLabel="Lido" itemValue="3" />
+                        <f:selectItem itemLabel="Dado ciência" itemValue="4" />
+                        <f:selectItem itemLabel="Respondido" itemValue="5" />
+                    </p:selectOneMenu>
+                    <p:message for="txtSetorDestino"/>
+                     </p:panelGrid>
+            
+                        <p:commandButton value="Enviar" action="#{memorandoController.inserir(memorando)}"
+                                          update=":formMemorando :gro " process=":formMemorando @this" />
+            
+            
+            
+                </h:form>
+                
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+</html>
+
