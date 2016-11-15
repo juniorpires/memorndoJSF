@@ -81,21 +81,13 @@
                     <h:outputText value="Setor Origem"/>
                     <p:selectOneMenu id="txtSetorOrigem" value="#{memorando.setorOrigem}" required="true" requiredMessage="Obrigatório">
                         <f:selectItem itemLabel="Selecione" itemValue="" />
-                        <f:selectItem itemLabel="Enviado" itemValue="1" />
-                        <f:selectItem itemLabel="Recebido e não enviado" itemValue="2" />
-                        <f:selectItem itemLabel="Lido" itemValue="3" />
-                        <f:selectItem itemLabel="Dado ciência" itemValue="4" />
-                        <f:selectItem itemLabel="Respondido" itemValue="5" />
+                        <f:selectItems value="#{memorandoController.setores}" />
                     </p:selectOneMenu>
                     <p:message for="txtSetorOrigem"/>
                     <h:outputText value="Setor Destino"/>
                     <p:selectOneMenu id="txtSetorDestino" value="#{memorando.setorDestino}" required="true" requiredMessage="Obrigatório">
                         <f:selectItem itemLabel="Selecione" itemValue="" />
-                        <f:selectItem itemLabel="Enviado" itemValue="1" />
-                        <f:selectItem itemLabel="Recebido e não enviado" itemValue="2" />
-                        <f:selectItem itemLabel="Lido" itemValue="3" />
-                        <f:selectItem itemLabel="Dado ciência" itemValue="4" />
-                        <f:selectItem itemLabel="Respondido" itemValue="5" />
+                        <f:selectItems value="#{memorandoController.setores}" />
                     </p:selectOneMenu>
                     <p:message for="txtSetorDestino"/>
                      </p:panelGrid>

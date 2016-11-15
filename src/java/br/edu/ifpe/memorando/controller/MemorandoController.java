@@ -12,8 +12,10 @@ import br.edu.ifpe.memorando.exception.NotFoundObjectException;
 import br.edu.ifpe.memorando.exception.SaveException;
 import br.edu.ifpe.memorando.exception.UpdateException;
 import br.edu.ifpe.memorando.models.Memorando;
+import br.edu.ifpe.memorando.models.Setor;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,6 +23,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 
 /**
  *
@@ -32,14 +35,27 @@ public class MemorandoController {
     
     private MemorandoDao dao;
     private List<Memorando> memorandos;
+    private List<SelectItem> setores;
     
     public MemorandoController(){
         super();
         this.dao = new MemorandoDao();
         this.memorandos = this.dao.findAll();
+        this.findSetores();
+        
+        
+        
     }
     
-    
+    private void findSetores(){
+        this.setores = new ArrayList<SelectItem>();
+        
+        List<Setor> list = new SetorController().getSetores();
+        for (Setor setor : list) {
+            this.setores.add(new SelectItem(setor.getId(),setor.getSigla()));
+        }
+        
+    }
     public String inserir(Memorando memorando){
         
         try {
@@ -76,6 +92,10 @@ public class MemorandoController {
     
     public List<Memorando> getMemorandos(){
         return this.memorandos;
+    }
+    
+    public List<SelectItem> getSetores(){
+        return this.setores;
     }
     
     public void remover(Memorando memorando){
