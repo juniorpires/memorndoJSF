@@ -45,7 +45,10 @@ public class Memorando extends IModel<Setor>{
     }
     
     public Memorando(){
-        
+        if(this.id==null){
+           this.gerarId();
+
+        }
     }
     
     private void gerarId(){

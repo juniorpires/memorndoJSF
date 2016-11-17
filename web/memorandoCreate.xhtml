@@ -28,9 +28,9 @@
                     <h:form>
                     <p:menu>
                         <p:submenu label="Resources">
-                            <p:menuitem value="Cadastrar Setor" url="/memorando/CadastrarSetor" />
-                            <p:menuitem value="Enviar Memorando" url="/memorando/EnviarMemorando" />
-                            <p:menuitem value="Listar Memorandos " url="/memorando/ListarMemorandos" />
+                            <p:menuitem value="Cadastrar Setor" url="/faces/setorCreate.xhtml" />
+                            <p:menuitem value="Enviar Memorando" url="/faces/memorandoCreate.xhtml" />
+                            <p:menuitem value="Listar Memorandos " url="/faces/memorandoList.xhtml" />
 
                         </p:submenu>
 
@@ -45,11 +45,6 @@
                 <h:form id="formMemorando">
                     
                  <p:panelGrid columns="3">
-                    <h:outputText value="Número:"/>
-                    
-                    <p:inputText id="txtNome" value="#{memorando.numero}" required="true"
-                                 requiredMessage="Obrigatório"/>
-                    <p:message for="txtNome"/>
 
                     <h:outputText value="Assunto"/>
                     <p:inputText id="txtAssunto" value="#{memorando.assunto}" required="true" requiredMessage="Obrigatório"/>
@@ -61,7 +56,7 @@
                     
                     
                     <h:outputText value="Tipo"/>
-                    <p:selectOneMenu id="txtTipo" value="#{memorando.tipo}" required="true" requiredMessage="Obrigatório">
+                    <p:selectOneMenu id="txtTipo" value="#{tipo}" required="true" requiredMessage="Obrigatório">
                         <f:selectItem itemLabel="Selecione" itemValue="" />
                         <f:selectItem itemLabel="Circular" itemValue="0" />
                         <f:selectItem itemLabel="Requisição" itemValue="1" />
@@ -69,7 +64,7 @@
                     <p:message for="txtTipo"/>
                     
                     <h:outputText value="Status"/>
-                    <p:selectOneMenu id="txtStatus" value="#{memorando.status}" required="true" requiredMessage="Obrigatório">
+                    <p:selectOneMenu id="txtStatus" value="#{status}" required="true" requiredMessage="Obrigatório">
                         <f:selectItem itemLabel="Selecione" itemValue="" />
                         <f:selectItem itemLabel="Enviado" itemValue="1" />
                         <f:selectItem itemLabel="Recebido e não enviado" itemValue="2" />
@@ -80,13 +75,13 @@
                     <p:message for="txtStatus"/>
                     
                     <h:outputText value="Setor Origem"/>
-                    <p:selectOneMenu id="txtSetorOrigem" value="#{memorando.setorOrigem}" required="true" requiredMessage="Obrigatório">
+                    <p:selectOneMenu id="txtSetorOrigem" value="#{origem}" required="true" requiredMessage="Obrigatório">
                         <f:selectItem itemLabel="Selecione" itemValue="" />
                         <f:selectItems value="#{memorandoController.setores}" />
                     </p:selectOneMenu>
                     <p:message for="txtSetorOrigem"/>
                     <h:outputText value="Setor Destino"/>
-                    <p:selectOneMenu id="txtSetorDestino" value="#{memorando.setorDestino}" required="true" requiredMessage="Obrigatório">
+                    <p:selectOneMenu id="txtSetorDestino" value="#{destino}" required="true" requiredMessage="Obrigatório">
                         <f:selectItem itemLabel="Selecione" itemValue="" />
                         <f:selectItems value="#{memorandoController.setores}" />
                     </p:selectOneMenu>

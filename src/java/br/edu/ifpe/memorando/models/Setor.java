@@ -34,7 +34,10 @@ public class Setor extends IModel<Setor>{
        return s;
    }
    public Setor(){
-      
+     if(this.id==null){  
+          this.gerarId();
+
+     }
    }
    
    private void gerarId(){

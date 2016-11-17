@@ -9,7 +9,7 @@
         <h:head>
             <f:facet name="first">
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-                <title>Criar Setor</title>
+                <title>Memorandos</title>
             </f:facet>
         </h:head>
 
@@ -25,58 +25,33 @@
                 </p:layoutUnit>
 
                 <p:layoutUnit position="west" size="175" header="Left" collapsible="true">
-<!--                    <p:menu>
+                    <p:menu>
                         <p:submenu label="Resources">
-                            <p:menuitem value="Cadastrar Setor" url="/memorando/CadastrarSetor" />
-                            <p:menuitem value="Enviar Memorando" url="/memorando/EnviarMemorando" />
-                            <p:menuitem value="Listar Memorandos " url="/memorando/ListarMemorandos" />
+                            <p:menuitem value="Cadastrar Setor" url="/faces/setorCreate.xhtml" />
+                            <p:menuitem value="Enviar Memorando" url="/faces/memorandoCreate.xhtml" />
+                            <p:menuitem value="Listar Memorandos " url="/faces/memorandoList.xhtml" />
 
                         </p:submenu>
 
-                    </p:menu>-->
+                    </p:menu>
                 </p:layoutUnit>
 
             <p:layoutUnit position="center">
                 
-                <p:growl id="gro"/>
-                
-                <h:form id="formCadSetor">
-                    
-                 <p:panelGrid columns="3">
-                    <h:outputText value="Nome:"/>
-                    <p:inputText id="txtNome" value="#{setor.nome}" required="true"
-                                 requiredMessage="O nome é obrigatório"/>
-                    <p:message for="txtNome"/>
-
-                    <h:outputText value="Sigla"/>
-                    <p:inputText value="#{setor.sigla}" required="true"/>
-                    <h:outputText/>
-
-                    <h:outputText value="Senha"/>
-                    <p:password value="#{setor.senha}" required="true"/>
-                    <h:outputText/>
-
-                    <h:outputText value="Confirma Senha"/>
-                    <p:password id="passConfirma" value="#{confirma}" required="true"/>
-                    <p:message for="passConfirma"/>
-                     </p:panelGrid>
-            
-                        <p:commandButton value="sim" action="#{setorController.inserir(setor)}"
-                                          update=":formCadSetor :gro :tabSetor" process=":formCadSetor @this" />
-            
-            
-            
-                </h:form>
-                <br/>
-                <br/>
-                <p:dataTable id="tabSetor" var="s" value="#{setorController.setores}" >
-                    <p:column headerText="Setor">
-                        <h:outputText value="#{s.nome}"/>
+             <h:form id="listaMemorando">   
+                <p:dataTable id="tabMemorando" var="m" value="#{memorandoController.memorandos}" >
+                    <p:column sortBy="#{m.numero}" headerText="Número">
+                        <h:outputText value="#{m.numero}"/>
                     </p:column>
-                    <p:column headerText="Sigla">
-                        <h:outputText value="#{s.sigla}"/>
+                    <p:column sortBy="#{m.assunto}" headerText="Assunto">
+                        <h:outputText value="#{m.assunto}"/>
+                    </p:column>
+                    <p:column sortBy="#{m.status}" headerText="Status">
+                        <h:outputText value="#{m.status}"/>
                     </p:column>
                 </p:dataTable>
+                 </h:form>
+                
                 </p:layoutUnit>
 
             </p:layout>

@@ -28,9 +28,9 @@
                     <h:form>
                     <p:menu>
                         <p:submenu label="Resources">
-                            <p:menuitem value="Cadastrar Setor" url="/memorando/CadastrarSetor" />
-                            <p:menuitem value="Enviar Memorando" url="/memorando/EnviarMemorando" />
-                            <p:menuitem value="Listar Memorandos " url="/memorando/ListarMemorandos" />
+                            <p:menuitem value="Cadastrar Setor" url="/faces/setorCreate.xhtml" />
+                            <p:menuitem value="Enviar Memorando" url="/faces/memorandoCreate.xhtml" />
+                            <p:menuitem value="Listar Memorandos " url="/faces/memorandoList.xhtml" />
 
                         </p:submenu>
 
@@ -51,8 +51,8 @@
                     <p:message for="txtNome"/>
 
                     <h:outputText value="Sigla"/>
-                    <p:inputText value="#{setor.sigla}" required="true" />
-                    
+                    <p:inputText id="txtSigla" value="#{setor.sigla}" required="true" />
+                    <p:message for="txtSigla"/>
 
                     <h:outputText value="Senha"/>
                     <p:password value="#{setor.senha}" required="true"/>
@@ -63,7 +63,7 @@
                     <p:message for="passConfirma"/>
                      </p:panelGrid>
             
-                        <p:commandButton value="sim" action="#{setorController.inserir(setor)}"
+                        <p:commandButton value="Inserir" action="#{setorController.inserir(setor)}"
                                           update=":formCadSetor :gro :tabSetor" process=":formCadSetor @this" />
             
             
