@@ -28,6 +28,7 @@
                     <p:menu>
                         <p:submenu label="Resources">
                             <p:menuitem value="Cadastrar Setor" url="/faces/setorCreate.xhtml" />
+                            <p:menuitem value="Listar Setores" url="/faces/setorList.xhtml" />
                             <p:menuitem value="Enviar Memorando" url="/faces/memorandoCreate.xhtml" />
                             <p:menuitem value="Listar Memorandos " url="/faces/memorandoList.xhtml" />
 
@@ -49,9 +50,39 @@
                     <p:column sortBy="#{m.status}" headerText="Status">
                         <h:outputText value="#{m.status}"/>
                     </p:column>
+                    <p:column>
+                        <p:commandLink value="Exibir" oncomplete="PF('widDialMemorandoView').show()" 
+                                       update=":dialMemorandoView" immediate="true">
+                            <f:setPropertyActionListener target="#{memorandoController.memorandoSelecionado}" 
+                                                         value="#{m}"  
+                                     />
+                        </p:commandLink>
+                    </p:column>
                 </p:dataTable>
                  </h:form>
-                
+                <p:dialog id="dialMemorandoView" visible="false" widgetVar="widDialMemorandoView">
+            <h:form>
+                <f:facet name="header">
+                    Memorando
+                </f:facet>
+                <p:panelGrid id="panelView" columns="2">
+                    <h:outputText value="Número"/>
+                    <h:outputText value="#{memorandoController.memorandoSelecionado.numero}"/>
+                    <h:outputText value="Assunto"/>
+                    <h:outputText value="#{memorandoController.memorandoSelecionado.assunto}"/>
+                    <h:outputText value="Mensagem"/>
+                    <h:outputText value="#{memorandoController.memorandoSelecionado.mensagem}"/>
+                    <h:outputText value="Tipo"/>
+                    <h:outputText value="#{memorandoController.memorandoSelecionado.tipo}"/>
+                    <h:outputText value="Status"/>
+                    <h:outputText value="#{memorandoController.memorandoSelecionado.status.label}"/>
+                    <h:outputText value="Setor de Origem"/>
+                    <h:outputText value="#{memorandoController.memorandoSelecionado.setorOrigem.sigla}"/>
+                    <h:outputText value="Setor de Destino"/>
+                    <h:outputText value="#{memorandoController.memorandoSelecionado.setorDestino.sigla}"/>
+                </p:panelGrid>
+                </h:form>
+            </p:dialog>
                 </p:layoutUnit>
 
             </p:layout>

@@ -9,7 +9,7 @@
         <h:head>
             <f:facet name="first">
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-                <title>Criar Setor</title>
+                <title>Enviar Memorando</title>
             </f:facet>
         </h:head>
 
@@ -29,6 +29,7 @@
                     <p:menu>
                         <p:submenu label="Resources">
                             <p:menuitem value="Cadastrar Setor" url="/faces/setorCreate.xhtml" />
+                            <p:menuitem value="Listar Setores" url="/faces/setorList.xhtml" />
                             <p:menuitem value="Enviar Memorando" url="/faces/memorandoCreate.xhtml" />
                             <p:menuitem value="Listar Memorandos " url="/faces/memorandoList.xhtml" />
 
@@ -66,11 +67,11 @@
                     <h:outputText value="Status"/>
                     <p:selectOneMenu id="txtStatus" value="#{status}" required="true" requiredMessage="Obrigatório">
                         <f:selectItem itemLabel="Selecione" itemValue="" />
-                        <f:selectItem itemLabel="Enviado" itemValue="1" />
-                        <f:selectItem itemLabel="Recebido e não enviado" itemValue="2" />
-                        <f:selectItem itemLabel="Lido" itemValue="3" />
-                        <f:selectItem itemLabel="Dado ciência" itemValue="4" />
-                        <f:selectItem itemLabel="Respondido" itemValue="5" />
+                        <f:selectItem itemLabel="Enviado" itemValue="0" />
+                        <f:selectItem itemLabel="Recebido e não enviado" itemValue="1" />
+                        <f:selectItem itemLabel="Lido" itemValue="2" />
+                        <f:selectItem itemLabel="Dado ciência" itemValue="3" />
+                        <f:selectItem itemLabel="Respondido" itemValue="4" />
                     </p:selectOneMenu>
                     <p:message for="txtStatus"/>
                     

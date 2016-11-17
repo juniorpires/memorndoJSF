@@ -29,6 +29,7 @@
                     <p:menu>
                         <p:submenu label="Resources">
                             <p:menuitem value="Cadastrar Setor" url="/faces/setorCreate.xhtml" />
+                            <p:menuitem value="Listar Setores" url="/faces/setorList.xhtml" />
                             <p:menuitem value="Enviar Memorando" url="/faces/memorandoCreate.xhtml" />
                             <p:menuitem value="Listar Memorandos " url="/faces/memorandoList.xhtml" />
 
@@ -64,21 +65,11 @@
                      </p:panelGrid>
             
                         <p:commandButton value="Inserir" action="#{setorController.inserir(setor)}"
-                                          update=":formCadSetor :gro :tabSetor" process=":formCadSetor @this" />
+                                          update=":formCadSetor :gro" process=":formCadSetor @this" />
             
             
             
                 </h:form>
-                <br/>
-                <br/>
-                <p:dataTable id="tabSetor" var="s" value="#{setorController.setores}" >
-                    <p:column headerText="Setor">
-                        <h:outputText value="#{s.nome}"/>
-                    </p:column>
-                    <p:column headerText="Sigla">
-                        <h:outputText value="#{s.sigla}"/>
-                    </p:column>
-                </p:dataTable>
                 </p:layoutUnit>
 
             </p:layout>

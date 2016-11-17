@@ -13,7 +13,7 @@ import javax.faces.bean.ManagedBean;
  * @author casa01
  */
 @ManagedBean
-public class Memorando extends IModel<Setor>{
+public class Memorando extends IModel<Memorando>{
     
     
     public static final String NUMERO = "numero";
@@ -161,8 +161,17 @@ public class Memorando extends IModel<Setor>{
     }
 
     @Override
-    public void copyAttributesOf(Setor copy) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void copyAttributesOf(Memorando copy) {
+         this.ano = copy.getAno();
+       this.assunto = copy.getAssunto();
+       this.id = copy.getId();
+       this.mensagem = copy.getMensagem();
+       this.numero = copy.getNumero();
+       this.sequencia = copy.getSequencia();
+       this.setorDestino = copy.getSetorDestino();
+       this.setorOrigem = copy.getSetorOrigem();
+       this.status = copy.getStatus();
+       this.tipo = copy.getTipo();
     }
 
     @Override

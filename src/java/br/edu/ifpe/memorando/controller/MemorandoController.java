@@ -42,6 +42,9 @@ public class MemorandoController {
     private SetorDao setorDao;
     private List<Memorando> memorandos;
     private List<SelectItem> setores;
+    private Memorando memorandoSelecionado;
+    private Setor sOrigem;
+    private Setor sDestino;
     
     public MemorandoController(){
         super();
@@ -59,7 +62,7 @@ public class MemorandoController {
         
         List<Setor> list = new SetorController().getSetores();
         for (Setor setor : list) {
-            this.setores.add(new SelectItem(setor.getId(),setor.getSigla()));
+            this.setores.add(new SelectItem(setor.getSigla(),setor.getSigla()));
         }
         
     }
@@ -69,6 +72,9 @@ public class MemorandoController {
         try {
             this.fillModel(memorando);
             this.dao.save(memorando, true);
+            //memorando.setSetorOrigem(sOrigem);
+            //memorando.setSetorDestino(sDestino);
+            //this.dao.update(memorando);
             this.memorandos = this.getMemorandos();
             
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("o memorando foi cadastrado com sucesso!"));
@@ -96,8 +102,8 @@ public class MemorandoController {
             memorando.setStatus(Status.fromValue(Integer.valueOf(status)));
             memorando.setTipo(Tipo.fromValue(Integer.valueOf(tipo)));
             
-            Setor sOrigem = this.setorDao.findBySigla(origem);
-            Setor sDestino = this.setorDao.findBySigla(destino);
+            sOrigem = this.setorDao.findBySigla(origem);
+            sDestino = this.setorDao.findBySigla(destino);
             memorando.setSetorOrigem(sOrigem);
             memorando.setSetorDestino(sDestino);
             
@@ -139,6 +145,22 @@ public class MemorandoController {
     public void remover(Memorando memorando){
         this.dao.delete(memorando);
     }
+
+    /**
+     * @return the memorandoSelecionado
+     */
+    public Memorando getMemorandoSelecionado() {
+        return memorandoSelecionado;
+    }
+
+    /**
+     * @param memorandoSelecionado the memorandoSelecionado to set
+     */
+    public void setMemorandoSelecionado(Memorando memorandoSelecionado) {
+        this.memorandoSelecionado = memorandoSelecionado;
+    }
+    
+    
     
     
 }

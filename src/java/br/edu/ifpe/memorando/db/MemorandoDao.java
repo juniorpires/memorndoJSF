@@ -5,6 +5,11 @@
  */
 package br.edu.ifpe.memorando.db;
 
+import br.edu.ifpe.memorando.exception.ManyObjectFoundException;
+import br.edu.ifpe.memorando.exception.NoUniqueObjectException;
+import br.edu.ifpe.memorando.exception.NotFoundObjectException;
+import br.edu.ifpe.memorando.exception.SaveException;
+import br.edu.ifpe.memorando.exception.UpdateException;
 import br.edu.ifpe.memorando.models.Memorando;
 import br.edu.ifpe.memorando.util.DateUtil;
 import com.db4o.ObjectContainer;
@@ -17,6 +22,8 @@ import java.util.List;
  * @author casa01
  */
 public class MemorandoDao extends GenericDb4oDAO<Memorando>{
+    
+    private SetorDao setorDao = new SetorDao();
 
     @Override
     protected Query getQueryToUniqueObject(Memorando model, ObjectContainer db) {
@@ -44,5 +51,60 @@ public class MemorandoDao extends GenericDb4oDAO<Memorando>{
         
         
     }
+     @Override
+	protected boolean update(Memorando modelReceived,
+			ObjectContainer db) throws UpdateException,
+			ManyObjectFoundException, NotFoundObjectException {
+
+		Memorando memorando = this
+				.find(modelReceived, db);
+		return this.update(memorando, modelReceived, db);
+
+	}
+
+        @Override
+	protected boolean update(Memorando modelRetrieved,
+			Memorando modelReceived, ObjectContainer db)
+			throws UpdateException, ManyObjectFoundException,
+			         NotFoundObjectException {
+
+		modelRetrieved.copyAttributesOf(modelReceived);
+		// atualiza o SetorDestino
+		modelRetrieved.setSetorDestino(this.setorDao.find(
+				modelReceived.getSetorDestino(), db));
+		// atualiza o SetorOrigem
+		modelRetrieved.setSetorOrigem(this.setorDao.find(
+				modelReceived.getSetorOrigem(), db));
+
+		return true;
+	}
+        
+        @Override
+	protected boolean save(Memorando model, ObjectContainer db,
+			boolean checkExists) throws SaveException,
+			ManyObjectFoundException, NoUniqueObjectException {
+		try {
+			if (checkExists) {
+				if (this.exists(model, db)) {
+
+					throw new NoUniqueObjectException(
+							"memorando encontra-se cadastrado no banco de dados "
+									+ model);
+				}
+			}
+			// atualiza o SetorDestino
+                        model.setSetorDestino(this.setorDao.find(
+				model.getSetorDestino(), db));
+                        // atualiza o SetorOrigem
+                        model.setSetorOrigem(this.setorDao.find(
+				model.getSetorOrigem(), db));
+
+			db.store(model);
+			return true;
+		} catch (NotFoundObjectException e) {
+			throw new SaveException(e);
+		}
+	}
+
     
 }
